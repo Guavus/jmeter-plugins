@@ -121,6 +121,8 @@ public class JSONPathExtractor extends AbstractTestElement implements PostProces
                 }
             } else {
                 vars.put(this.getVar(), objectToString(jsonPathResult));
+                vars.put(this.getVar() + "_1", objectToString(jsonPathResult));
+                vars.put(this.getVar() + "_matchNr", "1");
             }
         } catch (Exception e) {
             log.warn("Extract failed", e);
