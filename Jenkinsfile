@@ -16,19 +16,19 @@ pipeline {
         sh 'mvn jar:jar'
       }
     }
-    stage ('publish to artifactory')
-    parallel {
-      stage ('Montreal Repo') {
-        steps {
-          echo "push to Montreal"
+    stage ('publish to artifactory') {
+      parallel {
+        stage ('Montreal Repo') {
+          steps {
+            echo "push to Montreal"
+          }
         }
-      }
-      stage ('India repo') {
-        steps {
-          echo "push to India"
+        stage ('India repo') {
+          steps {
+            echo "push to India"
+          }
         }
       }
     }
-
   }
 }
