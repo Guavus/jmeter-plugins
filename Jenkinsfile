@@ -9,13 +9,11 @@ pipeline {
     stage ('test') {
       parallel {
         stage ('Test compile') {
-          agent { docker 'maven:3-jdk-8' }
           steps {
             sh 'mvn compiler:testCompile'
           }
         }
         stage ('Test Surefire') {
-          agent { docker 'maven:3-jdk-8' }
           steps {
             sh 'mvn surfire:test'
           }
