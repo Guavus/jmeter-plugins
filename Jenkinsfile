@@ -7,17 +7,8 @@ pipeline {
       }
     }
     stage ('test') {
-      parallel {
-        stage ('Test compile') {
-          steps {
-            sh 'mvn compiler:testCompile'
-          }
-        }
-        stage ('Test Surefire') {
-          steps {
-            sh 'mvn surfire:test'
-          }
-        }
+      steps {
+        sh 'mvn compiler:testCompile'
       }
     }
     stage ('package') {
@@ -25,5 +16,19 @@ pipeline {
         sh 'mvn jar:jar'
       }
     }
+    stage ('publish to artifactory')
+    parallel {
+      stage ('Montreal Repo') {
+        steps {
+          echo "push to Montreal"
+        }
+      }
+      stage ('India repo') {
+        steps {
+          echo "push to India"
+        }
+      }
+    }
+
   }
 }
