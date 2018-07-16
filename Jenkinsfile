@@ -19,9 +19,22 @@ pipeline {
     stage ('publish to artifactory') {
       parallel {
         stage ('Montreal Repo') {
-          steps {
-            echo "push to Montreal"
-          }
+            steps {
+                script{
+                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+                    def server = Artifactory.server 'mtl-docker-artifactory'
+                    def rtDocker = Artifactory.docker server: server
+
+                    // Read the download and upload specs:
+                    def uploadSpec = readFile 'jenkins-examples/pipeline-examples/resources/props-upload.json'
+
+                    // Upload files to Artifactory:
+                    def buildInfo = server.upload spec: uploadSpec
+
+                    // Publish the merged build-info to Artifactory
+                    server.publishBuildInfo buildInfo
+                }
+            }
         }
         stage ('India repo') {
           steps {
