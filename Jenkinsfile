@@ -2,11 +2,6 @@ pipeline {
   agent {
     docker 'maven:3-jdk-8'
   }
-  environment {
-    def server = Artifactory.server "SERVER_ID"
-    def rtMaven = Artifactory.newMavenBuild()
-    def buildInfo
-  }
   stages {
     stage ('build') {
       steps {
