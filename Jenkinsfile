@@ -31,7 +31,9 @@ pipeline {
     stage('build') {
       steps {
         script {
-          buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
+          // mvn -Dmaven.test.skip=true -Dadditionalparam=-Xdoclint:none clean package javadoc:jar source:jar gpg:sign deploy
+          rtMaven.opts = '-Dmaven.test.skip=true -Dadditionalparam=-Xdoclint:none'
+          buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package javadoc:jar source:jar gpg:sign deploy'
         }
       }
     }
