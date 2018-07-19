@@ -1,3 +1,7 @@
+def server = 'UNKNOWN'
+def rtMaven = 'UNKNOWN'
+def buildInfo = 'UNKNOWN'
+
 pipeline {
   agent any
   stages {
