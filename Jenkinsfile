@@ -30,7 +30,9 @@ pipeline {
 
     stage('build') {
       steps {
-        sh 'mvn compiler:compile'
+        script {
+          buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
+        }
       }
     }
     stage('test') {
@@ -45,10 +47,12 @@ pipeline {
     }
     stage('publish to artifactory') {
       parallel {
-        stage('Montreal Repo') {
+        stage('Publish Build info') {
           steps {
+            script {
+              server.publishBuildInfo buildInfo
+            }
             echo 'push to Monreal'
-
           }
         }
         stage('India repo') {
