@@ -37,16 +37,7 @@ pipeline {
         }
       }
     }
-    stage('test') {
-      steps {
-        sh 'mvn compiler:testCompile'
-      }
-    }
-    stage('package') {
-      steps {
-        sh 'mvn jar:jar'
-      }
-    }
+
     stage('publish to artifactory') {
       parallel {
         stage('Publish Build info') {
