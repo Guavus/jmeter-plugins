@@ -9,13 +9,10 @@ pipeline {
       steps {
         script {
           // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-
-          def server = Artifactory.server "mtl-artifactory"
+          server = Artifactory.server "mtl-artifactory"
 
           // Create an Artifactory Maven instance.
-
-          def rtMaven = Artifactory.newMavenBuild()
-          def buildInfo
+          rtMaven = Artifactory.newMavenBuild()
         }
       }
     }
