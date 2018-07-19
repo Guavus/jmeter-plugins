@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    docker 'maven:3-jdk-8'
+  }
   stages {
     stage ('build') {
       steps {
@@ -20,20 +22,7 @@ pipeline {
       parallel {
         stage ('Montreal Repo') {
             steps {
-                script{
-                    // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
-                    def server = Artifactory.server 'mtl-docker-artifactory'
-                    def rtDocker = Artifactory.docker server: server
-
-                    // Read the download and upload specs:
-                    def uploadSpec = readFile 'jenkins-examples/pipeline-examples/resources/props-upload.json'
-
-                    // Upload files to Artifactory:
-                    def buildInfo = server.upload spec: uploadSpec
-
-                    // Publish the merged build-info to Artifactory
-                    server.publishBuildInfo buildInfo
-                }
+              echo "push to Monreal"
             }
         }
         stage ('India repo') {
