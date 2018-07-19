@@ -1,6 +1,20 @@
 pipeline {
   agent any
   stages {
+    stage('Get Artifactory Information') {
+      steps {
+        script {
+          // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
+
+          def server = Artifactory.server "mtl-artifactory"
+
+          // Create an Artifactory Maven instance.
+
+          def rtMaven = Artifactory.newMavenBuild()
+          def buildInfo
+        }
+      }
+    }
     stage('build') {
       steps {
         sh 'mvn compiler:compile'
@@ -21,16 +35,6 @@ pipeline {
         stage('Montreal Repo') {
           steps {
             echo 'push to Monreal'
-            script {
-              // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-
-              def server = Artifactory.server "mtl-artifactory"
-
-              // Create an Artifactory Maven instance.
-
-              def rtMaven = Artifactory.newMavenBuild()
-              def buildInfo
-            }
 
           }
         }
