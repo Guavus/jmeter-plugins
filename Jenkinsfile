@@ -1,7 +1,7 @@
 def server = 'UNKNOWN'
 def rtMaven = 'UNKNOWN'
 def buildInfo = 'UNKNOWN'
-def uploadSpec = readFile './upload-properties.json'
+def uploadSpec = 'UNKNOWN'
 
 pipeline {
   agent any
@@ -45,6 +45,8 @@ pipeline {
           steps {
             echo 'push to Monreal'
             script {
+              // 
+              uploadSpec = readFile './upload-properties.json'
               // Upload to Artifactory.
               server.publishBuildInfo( server.upload (spec: uploadSpec))
           }
