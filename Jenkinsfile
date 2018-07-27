@@ -46,7 +46,7 @@ pipeline {
             echo 'push to Monreal'
             sript {
               // Upload to Artifactory.
-              server.publishBuildInfo( server.upload spec: uploadSpec)
+              server.publishBuildInfo( server.upload (spec: uploadSpec))
           }
         }
 
