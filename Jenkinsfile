@@ -1,6 +1,7 @@
 def server = 'UNKNOWN'
 def rtMaven = 'UNKNOWN'
 def buildInfo = 'UNKNOWN'
+def uploadSpec = readFile './upload-properties.json'
 
 pipeline {
   agent any
@@ -44,12 +45,8 @@ pipeline {
           steps {
             echo 'push to Monreal'
             sript {
-              // Read the upload spec which was downloaded from github.
-              def uploadSpec = readFile './upload-properties.json'
               // Upload to Artifactory.
-              def buildInfo1 = server.upload spec: uploadSpec
-              // Publish the build to Artifactory
-              server.publishBuildInfo buildInfo1
+              server.publishBuildInfo( server.upload spec: uploadSpec)
           }
         }
 
