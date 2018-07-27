@@ -45,8 +45,8 @@ pipeline {
           steps {
             echo 'push to Monreal'
             script {
-              // 
-              uploadSpec = readFile './upload-properties.json'
+              //
+              uploadSpec = readFile "./upload-properties.json"
               // Upload to Artifactory.
               server.publishBuildInfo( server.upload (spec: uploadSpec))
           }
@@ -55,7 +55,7 @@ pipeline {
         }
         stage('India repo') {
           steps {
-            echo 'push to India'
+            echo "push to India"
           }
         }
       }
