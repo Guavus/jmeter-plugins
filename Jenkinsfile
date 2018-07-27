@@ -44,7 +44,7 @@ pipeline {
         stage('Publish Build info') {
           steps {
             echo 'push to Monreal'
-            sript {
+            script {
               // Upload to Artifactory.
               server.publishBuildInfo( server.upload (spec: uploadSpec))
           }
