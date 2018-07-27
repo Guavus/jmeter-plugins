@@ -45,9 +45,9 @@ pipeline {
       parallel {
         stage('Publish Build info') {
           steps {
-            script {
-              server.publishBuildInfo buildInfo
-            }
+            // script {
+            //   server.publishBuildInfo buildInfo
+            // }
             echo 'push to Monreal'
           }
         }
