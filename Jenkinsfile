@@ -30,7 +30,7 @@ pipeline {
 
     stage('build') {
       steps {
-        sh 'mvn -Dmaven.test.skip=true -Dadditionalparam=-Xdoclint:none clean package javadoc:jar source:jar deploy'
+        sh 'mvn -Dmaven.test.skip=true -Dadditionalparam=-Xdoclint:none clean package javadoc:jar source:jar'
         //
         // script {
         //   // mvn -Dmaven.test.skip=true -Dadditionalparam=-Xdoclint:none clean package javadoc:jar source:jar gpg:sign deploy
