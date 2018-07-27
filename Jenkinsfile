@@ -10,9 +10,6 @@ pipeline {
         script {
           // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
           server = Artifactory.server "mtl-artifactory"
-
-          // Create an Artifactory Maven instance.
-          rtMaven = Artifactory.newMavenBuild()
         }
       }
     }
@@ -45,11 +42,17 @@ pipeline {
       parallel {
         stage('Publish Build info') {
           steps {
-            // script {
-            //   server.publishBuildInfo buildInfo
-            // }
             echo 'push to Monreal'
+            sript {
+              // Read the upload spec which was downloaded from github.
+              def uploadSpec = readFile './upload-properties.json'
+              // Upload to Artifactory.
+              def buildInfo1 = server.upload spec: uploadSpec
+              // Publish the build to Artifactory
+              server.publishBuildInfo buildInfo1
           }
+        }
+
         }
         stage('India repo') {
           steps {
