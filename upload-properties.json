@@ -2,8 +2,7 @@
   "files": [
     {
       "pattern": "plugins/json/target/jmeter-plugins-json-2.6.jar",
-      "target": "libs-snapshot-local",
-      "props": "p1=v1;p2=v2"
+      "target": "jmeter-json"
     }
   ]
 }
