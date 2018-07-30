@@ -46,7 +46,16 @@ pipeline {
             echo 'push to Monreal'
             script {
               //
-              uploadSpec = readFile ""
+              uploadSpec = """
+                  {
+                    "files": [
+                      {
+                        "pattern": "plugins/json/target/*.jar",
+                        "target": "jmeter-json",
+                      }
+                    ]
+                  }
+              """
               // Upload to Artifactory.
               server.publishBuildInfo( server.upload (spec: uploadSpec))
           }
