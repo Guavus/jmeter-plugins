@@ -50,7 +50,7 @@ pipeline {
                 "files": [
                   {
                     "pattern": "plugins/json/target/*.jar",
-                    "target": "jmeter-json"
+                    "target": "libs-snapshot-local"
                   }
                 ]
               }"""
